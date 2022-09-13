@@ -54,6 +54,9 @@
 
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 (setq prelude-format-on-save nil)
+
+(setq typescript-indent-level 2)
+
 ;; end Typescript setup
 
 (with-eval-after-load 'magit
