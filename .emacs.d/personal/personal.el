@@ -7,7 +7,7 @@
 ;;; Code:
 
 (prelude-require-packages
- '(solarized-theme robe projectile-rails prettier-mode enh-ruby-mode))
+ '(solarized-theme robe projectile-rails prettier enh-ruby-mode))
 
 (load-theme 'solarized-light)
 (toggle-scroll-bar -1)
