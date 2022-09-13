@@ -7,7 +7,7 @@
 ;;; Code:
 
 (prelude-require-packages
- '(solarized-theme robe projectile-rails prettier enh-ruby-mode))
+ '(solarized-theme robe projectile-rails prettier enh-ruby-mode forge))
 
 (load-theme 'solarized-light)
 (toggle-scroll-bar -1)
@@ -59,17 +59,5 @@
 (with-eval-after-load 'magit
   (require 'forge))
 
-(defun as-grailed (&optional env)
-  (interactive (list (read-string "Environment: " "development")))
-  (progn (setenv "MARKETPLACE" "grailed")
-         (setenv "RAILS_ENV" env)))
-
-(defun as-heroine (&optional env)
-  (interactive (list (read-string "Environment: " "development")))
-  (progn (setenv "MARKETPLACE" "heroine")
-         (setenv "RAILS_ENV" env)))
-
 (server-start)
-
-(setenv "MARKETPLACE" "grailed")
 ;;; personal.el ends here
