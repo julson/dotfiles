@@ -41,7 +41,11 @@
 
 (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
 
-(add-hook 'after-init-hook #'global-prettier-mode)
+(require 'rubocopfmt)
+(add-hook 'ruby-mode-hook #'rubocopfmt-mode)
+(add-hook 'enh-ruby-mode-hook 'rubocopfmt-mode)
+
+;;(add-hook 'after-init-hook #'global-prettier-mode)
 
 ;; Typescript setup
 (require 'web-mode)
@@ -61,6 +65,25 @@
 
 (with-eval-after-load 'magit
   (require 'forge))
+
+(require 'copilot)
+(add-hook 'prog-mode-hook 'copilot-mode)
+(add-to-list 'copilot-major-mode-alist '("enh-ruby" . "ruby"))
+(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+
+(use-package apheleia
+    :ensure apheleia
+    :diminish ""
+    :defines
+    apheleia-formatters
+    apheleia-mode-alist
+    :functions
+    apheleia-global-mode
+    :config
+    (setf (alist-get 'prettier-json apheleia-formatters)
+        '("prettier" "--stdin-filepath" filepath))
+    (apheleia-global-mode +1))
 
 (server-start)
 ;;; personal.el ends here
