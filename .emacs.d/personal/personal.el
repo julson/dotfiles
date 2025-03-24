@@ -66,12 +66,21 @@
 (with-eval-after-load 'magit
   (require 'forge))
 
-(require 'copilot)
-(add-hook 'prog-mode-hook 'copilot-mode)
-(add-to-list 'copilot-major-mode-alist '("enh-ruby" . "ruby"))
-(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-(add-to-list 'copilot-indentation-alist '(org-mode 2))
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main")
+  :init
+  (setq copilot-indent-offset-warning-disable t)
+  :bind (:map copilot-completion-map
+              ("<tab>" . copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("C-n" . 'copilot-next-completion)
+              ("C-p" . 'copilot-previous-completion))
+  :hook (prog-mode . copilot-mode)
+  :config (add-to-list 'copilot-major-mode-alist '("enh-ruby" . "ruby")))
 
 (use-package apheleia
   :ensure apheleia
