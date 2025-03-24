@@ -7,7 +7,7 @@
 ;;; Code:
 
 (prelude-require-packages
- '(solarized-theme robe projectile-rails prettier enh-ruby-mode forge))
+ '(solarized-theme robe projectile-rails prettier enh-ruby-mode forge rubocopfmt copilot apheleia corfu))
 
 (load-theme 'solarized-light)
 (toggle-scroll-bar -1)
@@ -71,19 +71,20 @@
 (add-to-list 'copilot-major-mode-alist '("enh-ruby" . "ruby"))
 (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
 (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+(add-to-list 'copilot-indentation-alist '(org-mode 2))
 
 (use-package apheleia
-    :ensure apheleia
-    :diminish ""
-    :defines
-    apheleia-formatters
-    apheleia-mode-alist
-    :functions
-    apheleia-global-mode
-    :config
-    (setf (alist-get 'prettier-json apheleia-formatters)
+  :ensure apheleia
+  :diminish ""
+  :defines
+  apheleia-formatters
+  apheleia-mode-alist
+  :functions
+  apheleia-global-mode
+  :config
+  (setf (alist-get 'prettier-json apheleia-formatters)
         '("prettier" "--stdin-filepath" filepath))
-    (apheleia-global-mode +1))
+  (apheleia-global-mode +1))
 
 (server-start)
 ;;; personal.el ends here
